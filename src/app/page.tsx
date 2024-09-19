@@ -5,6 +5,7 @@ import { UserButton } from '../features/auth/components/user-button';
 import { useGetWorkspaces } from '../features/workspaces/use-get-workspaces';
 import { useCreateWorkspaceModal } from '../features/workspaces/store/use-create-workspace-modal';
 import { useRouter } from 'next/navigation';
+import { Loader } from 'lucide-react';
 
 export default function Home() {
   const router = useRouter();
@@ -18,14 +19,15 @@ export default function Home() {
 
     if (workspaceId) {
       router.replace(`/workspace/${workspaceId}`);
-    } else if (!open) { // workspaceId が存在せず、かつ open が false の場合
+    } else if (!open) {
+      // workspaceId が存在せず、かつ open が false の場合
       setOpen(true);
     }
   }, [workspaceId, isLoading, open, setOpen, router]);
 
   return (
-    <div className="">
-      <UserButton />
+    <div className="h-full flex items-center justify-center">
+      <Loader className="size-6 animate-spin text-muted-foreground" />
     </div>
   );
 }
